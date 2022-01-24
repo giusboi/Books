@@ -24,5 +24,6 @@ module.exports = {
         "react-native"
     ],
     "rules": {
+        "@typescript-eslint/no-empty-interface": 0
     }
 }
