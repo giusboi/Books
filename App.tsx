@@ -1,11 +1,24 @@
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { useMemo, useState } from 'react';
 import { AppNavigator } from './src/Navigation';
-
-const MainStack = createNativeStackNavigator()
+import { EditMyState, EditMyStateContext, MyState, MyStateContext } from './src/store/MyState';
 
 export default function App() {
+  const [myStore, setMyStore] = useState<MyState>({
+    user: undefined
+  })
+
+  const editMyState: EditMyState = {
+    editUser: (user) => setMyStore({
+      ...myStore,
+      user
+    })
+  }
+
   return (
-    <AppNavigator />
+    <MyStateContext.Provider value={myStore}>
+      <EditMyStateContext.Provider value={editMyState}>
+        <AppNavigator />
+      </EditMyStateContext.Provider>
+    </MyStateContext.Provider>
   );
 }
