@@ -1,15 +1,11 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { MainStack } from './src/Navigation';
-import { HomeScreen } from './src/screens/HomeScreen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AppNavigator } from './src/Navigation';
+
+const MainStack = createNativeStackNavigator()
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <MainStack.Navigator>
-        <MainStack.Screen name="Home" component={HomeScreen} />
-      </MainStack.Navigator>
-    </NavigationContainer>
+    <AppNavigator />
   );
 }
