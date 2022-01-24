@@ -3,19 +3,19 @@ import { AppNavigator } from './src/Navigation';
 import { EditMyState, EditMyStateContext, MyState, MyStateContext } from './src/store/MyState';
 
 export default function App() {
-  const [myStore, setMyStore] = useState<MyState>({
+  const [myState, setMyState] = useState<MyState>({
     user: undefined
   })
 
   const editMyState: EditMyState = {
-    editUser: (user) => setMyStore({
-      ...myStore,
+    editUser: (user) => setMyState({
+      ...myState,
       user
     })
   }
 
   return (
-    <MyStateContext.Provider value={myStore}>
+    <MyStateContext.Provider value={myState}>
       <EditMyStateContext.Provider value={editMyState}>
         <AppNavigator />
       </EditMyStateContext.Provider>
