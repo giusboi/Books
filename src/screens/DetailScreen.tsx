@@ -8,7 +8,7 @@ interface Props extends NavProps {}
 
 export const DetailScreen = (props: Props) => {
   const { route } = props
-  const { userId } = route.params
+  // const { userId } = route.params
 
   return (
     <View>
