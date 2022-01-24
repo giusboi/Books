@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { MainStackParamList } from '../Navigation';
+import { StackParamList } from '../Navigation';
 
-type NavProps = NativeStackScreenProps<MainStackParamList, 'Home'>
+type NavProps = NativeStackScreenProps<StackParamList, 'Home'>
 
 interface Props extends NavProps {}
 

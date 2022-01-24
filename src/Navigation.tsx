@@ -3,21 +3,39 @@ import { NavigationContainer } from '@react-navigation/native';
 import { HomeScreen } from './screens/HomeScreen';
 import { DetailScreen } from './screens/DetailScreen';
 import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { AboutScreen } from './screens/AboutScreen';
 
-export type MainStackParamList = {
+export type StackParamList = {
   Home: undefined
   Detail: { userId: string }
 }
 
-const MainStack = createNativeStackNavigator<MainStackParamList>()
+const Tab = createBottomTabNavigator()
+const Stack = createNativeStackNavigator<StackParamList>()
+
+const MainStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name={'Home'} component={HomeScreen} />
+      <Stack.Screen name={"Detail"} component={DetailScreen} />
+    </Stack.Navigator>
+  )
+}
+
+const MainTab = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name={"MainStack"} component={MainStack} />
+      <Tab.Screen name={"About"} component={AboutScreen} />
+    </Tab.Navigator>
+  )
+}
 
 export const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <MainStack.Navigator>
-        <MainStack.Screen name={"Home"} component={HomeScreen} />
-        <MainStack.Screen name={"Detail"} component={DetailScreen} />
-      </MainStack.Navigator>
+      <MainTab />
     </NavigationContainer>
   )
 }
