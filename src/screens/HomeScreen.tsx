@@ -14,11 +14,7 @@ export const HomeScreen = (props: Props) => {
   const editMyState = useContext(EditMyStateContext)
 
   const onButtonPress = () => {
-    editMyState?.editUser({
-      name: 'Mario',
-      surname: 'Rossi',
-      userId: '12345'
-    })
+    editMyState?.getUser()
   }
 
   const onPress = () => {

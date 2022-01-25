@@ -12,5 +12,6 @@ export interface MyState {
 
 export interface EditMyState {
   readonly editUser: (user: User) => void
+  readonly getUser: () => Promise<void>
 }
 
