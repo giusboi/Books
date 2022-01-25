@@ -1,11 +1,16 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackParamList } from '../Navigation';
+import { MyButton } from '../components/MyButton';
 
 type NavProps = NativeStackScreenProps<StackParamList, 'Home'>
 
 interface Props extends NavProps {}
+
+interface Props {
+  hello: ''
+}
 
 export const HomeScreen = (props: Props) => {
   const { navigation } = props
@@ -15,9 +20,7 @@ export const HomeScreen = (props: Props) => {
 
   return (
     <View>
-      <TouchableOpacity onPress={onPress}>
-        <Text>This is the HomeScreen</Text>
-      </TouchableOpacity>
+      <MyButton screenName={'HomeScreen'} onPress={onPress} />
     </View>
   )
 }
