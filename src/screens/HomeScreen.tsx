@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackParamList } from '../Navigation';
@@ -14,8 +14,9 @@ interface Props {
 
 export const HomeScreen = (props: Props) => {
   const { navigation } = props
+
   const onPress = () => {
-    navigation.navigate('Detail', { userId: '12345' })
+    navigation.navigate('Detail')
   }
 
   return (
