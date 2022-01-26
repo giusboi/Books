@@ -16,7 +16,7 @@ export function createMyStore() {
 // Create some types for our typed hooks
 type CreateStoreReturnType = ReturnType<typeof createMyStore>
 type GetState = CreateStoreReturnType['getState']
-type RootState = ReturnType<GetState>
+export type RootState = ReturnType<GetState>
 type AppDispatch = CreateStoreReturnType['dispatch']
 
 // Export our typed Hooks
