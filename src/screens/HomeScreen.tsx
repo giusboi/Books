@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackParamList } from '../Navigation';
 import { useAppDispatch, useAppSelector } from '../store/store';
-import { increment } from '../store/counter/counterActions';
+import { increment, incrementAfter } from '../store/counter/counterActions';
 import { countSelector, multiplyCountSelector, useMultiplyCount } from '../store/counter/counterSelectors';
 
 type NavProps = NativeStackScreenProps<StackParamList, 'Home'>
@@ -19,11 +19,11 @@ export const HomeScreen = (props: Props) => {
   }
   const dispatch = useAppDispatch()
   // const count = useAppSelector((state) => multiplyCountSelector(state, 2))
-  // const count = useAppSelector(countSelector)
-  const count = useMultiplyCount(4)
+  const count = useAppSelector(countSelector)
+  // const count = useMultiplyCount(4)
 
   const incrementAction = () => {
-    dispatch(increment())
+    dispatch(incrementAfter(10, 5000))
   }
 
   return (
