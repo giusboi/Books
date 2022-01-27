@@ -1,7 +1,7 @@
 import { INCREMENT_ACTION, IncrementAction } from './counterActions';
 
 export interface CounterState {
-  count: number
+  readonly count: number
 }
 
 const initialState: CounterState = {
