@@ -18,6 +18,9 @@ export const DetailScreen = (props: Props) => {
   const [books, setBooks] = useState<ReadonlyArray<Book>>([])
 
   useEffect(() => {
+    if (!listNameEncoded) {
+      return
+    }
     ApiClient.getBooks(listNameEncoded).then(setBooks)
   }, [listNameEncoded])
 
