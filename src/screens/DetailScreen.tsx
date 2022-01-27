@@ -9,11 +9,11 @@ interface Props extends NavProps {}
 
 export const DetailScreen = (props: Props) => {
   const { route } = props
-  const { userId } = route.params
+  const { listNameEncoded } = route.params
 
   return (
     <View>
-      <Text>This is the DetailScreen {userId}</Text>
+      <Text>The listNameEncoded {listNameEncoded}</Text>
     </View>
   )
 }

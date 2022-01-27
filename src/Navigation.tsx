@@ -8,7 +8,7 @@ import { AboutScreen } from './screens/AboutScreen';
 
 export type StackParamList = {
   Home: undefined
-  Detail: { userId: string }
+  Detail: { listNameEncoded: string }
 }
 
 const Tab = createBottomTabNavigator()

@@ -32,7 +32,7 @@ export class ApiClient {
   }
 
   private static async _fetchJSON(path: string) {
-    const pathWithApiKey = `${path}?api-key${this.API_KEY}`
+    const pathWithApiKey = `${path}?api-key=${this.API_KEY}`
     const response = await fetch(this.BASE_URL + pathWithApiKey)
     if (!response.ok) {
       const errorMsg =
