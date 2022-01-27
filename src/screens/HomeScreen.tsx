@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button, FlatList, ListRenderItem, Text, View } from 'react-native';
+import { Button, FlatList, ListRenderItem, Text, TouchableOpacity, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackParamList } from '../Navigation';
 import { MyButton } from '../components/MyButton';
@@ -26,30 +26,31 @@ export const HomeScreen = (props: Props) => {
   const dispatch = useAppDispatch()
   // const count = useAppSelector((state) => countSelector(state))
   const count = useAppSelector((state) => multiplySelector(state, 2))
+
   const onIncrementPress = () => {
     const incrementAction = increment()
     dispatch(incrementAction)
   }
 
-  const onPress = () => {
-    navigation.navigate('Detail', { userId: '12345' })
-  }
+  const onCategoryPress = useCallback((category: Category) => {
+    navigation.navigate('Detail', {listNameEncoded: category.listNameEncoded})
+  }, [navigation])
 
   const renderItem = useCallback<ListRenderItem<Category>>((elem) => {
     const category = elem.item
     return (
       <View>
-        <Text>{category.displayName}</Text>
+        <TouchableOpacity onPress={() => onCategoryPress(category)}>
+          <Text>{category.displayName}</Text>
+        </TouchableOpacity>
       </View>
     )
-  }, [])
+  }, [onCategoryPress])
 
   const keyExtractor = useCallback((item, index) => `category_${index}`, []);
 
-
   return (
     <View style={{flex: 1}}>
-      <MyButton screenName={'HomeScreen'} onPress={onPress} />
       <Button title={'Increment'} onPress={onIncrementPress}/>
       <Text>Count: {count}</Text>
       <FlatList

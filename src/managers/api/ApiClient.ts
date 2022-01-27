@@ -20,7 +20,7 @@ export class ApiClient {
   public static async getBooks(listNameEncode: string): Promise<ReadonlyArray<Book>> {
     const path = `${listNameEncode}.json`
     const res: BooksRes = await this._fetchJSON(path)
-    return res.results.books.map(elem => ({
+    return  res.results.books.map(elem => ({
       title: elem.title,
       bookImage: {
         url: elem.book_image,
