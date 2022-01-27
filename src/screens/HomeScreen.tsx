@@ -5,7 +5,7 @@ import { StackParamList } from '../Navigation';
 import { MyButton } from '../components/MyButton';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { increment } from '../store/counter/counterActions';
-import { multiplySelector } from '../store/counter/counterSelectors';
+import { countSelector } from '../store/counter/counterSelectors';
 import { ApiClient } from '../managers/api/ApiClient';
 import { Category } from '../managers/api/models/Category';
 
@@ -24,8 +24,8 @@ export const HomeScreen = (props: Props) => {
   }, [])
 
   const dispatch = useAppDispatch()
-  // const count = useAppSelector((state) => countSelector(state))
-  const count = useAppSelector((state) => multiplySelector(state, 2))
+  const count = useAppSelector((state) => countSelector(state))
+  // const count = useAppSelector((state) => multiplySelector(state, 2))
 
   const onIncrementPress = () => {
     const incrementAction = increment()
