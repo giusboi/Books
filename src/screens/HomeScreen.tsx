@@ -5,7 +5,7 @@ import { StackParamList } from '../Navigation';
 import { MyButton } from '../components/MyButton';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { increment } from '../store/counter/counterActions';
-import { countSelector } from '../store/counter/counterSelectors';
+import { countSelector, multiplySelector } from '../store/counter/counterSelectors';
 
 type NavProps = NativeStackScreenProps<StackParamList, 'Home'>
 
@@ -16,7 +16,8 @@ interface Props {}
 export const HomeScreen = (props: Props) => {
   const { navigation } = props
   const dispatch = useAppDispatch()
-  const count = useAppSelector(countSelector)
+  // const count = useAppSelector((state) => countSelector(state))
+  const count = useAppSelector((state) => multiplySelector(state, 2))
   const onIncrementPress = () => {
     const incrementAction = increment()
     dispatch(incrementAction)
