@@ -1,17 +1,24 @@
-export const CHANGE_NAME_ACTION = "CHANGE_NAME_ACTION"
+export const CHANGE_USER_ACTION = "CHANGE_USER_ACTION"
 
-export interface ChangeNameAction {
-  type: typeof CHANGE_NAME_ACTION,
+export enum ChangeUserType {
+  NAME = 'NAME',
+  SURNAME = 'SURNAME'
+}
+
+export interface ChangeUserAction {
+  type: typeof CHANGE_USER_ACTION,
   payload: {
-    name: string
+    text: string
+    subType: ChangeUserType
   }
 }
 
-export function changeName(name: string): ChangeNameAction {
+export function changeUser(text: string, subType: ChangeUserType): ChangeUserAction {
   return {
-    type: CHANGE_NAME_ACTION,
+    type: CHANGE_USER_ACTION,
     payload: {
-      name
+      text,
+      subType
     }
   }
 }

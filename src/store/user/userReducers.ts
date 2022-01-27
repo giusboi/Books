@@ -1,4 +1,4 @@
-import { CHANGE_NAME_ACTION, ChangeNameAction } from './userActions';
+import { CHANGE_USER_ACTION, ChangeUserAction, ChangeUserType } from './userActions';
 
 export interface UserState {
   readonly name: string
@@ -9,19 +9,27 @@ export interface UserState {
 const initialState: UserState = {
   name: 'Mario',
   surname: 'Rossi',
-  userId: '12345'
+  userId: '12345_NEW'
 }
 
 export function userReducer(
   state: UserState = initialState,
-  action: ChangeNameAction
+  action: ChangeUserAction
 ): UserState {
   switch (action.type) {
-    case CHANGE_NAME_ACTION: {
-      return {
-        ...state,
-        name: action.payload.name
+    case CHANGE_USER_ACTION: {
+      if (action.payload.subType === ChangeUserType.NAME) {
+        return {
+          ...state,
+          name: action.payload.text
+        }
+      } else {
+        return {
+          ...state,
+          surname: action.payload.text
+        }
       }
+
     }
     default: {
       return state
