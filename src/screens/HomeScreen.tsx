@@ -3,7 +3,7 @@ import { Button, FlatList, ListRenderItem, Text, TouchableOpacity, View } from '
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackParamList } from '../Navigation';
 import { useAppDispatch, useAppSelector } from '../store/store';
-import { increment, incrementAfter } from '../store/counter/counterActions';
+import { incrementAfter } from '../store/counter/counterActions';
 import { countSelector } from '../store/counter/counterSelectors';
 import { ApiClient } from '../managers/api/ApiClient';
 import { Category } from '../managers/api/models/Category';

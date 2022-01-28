@@ -7,7 +7,7 @@ export interface IncrementAction {
   payload: undefined
 }
 
-export function increment(): IncrementAction {
+function _increment(): IncrementAction {
   return {
     type: INCREMENT_ACTION,
     payload: undefined
@@ -18,7 +18,7 @@ export function incrementAfter(milliseconds: number): AppThunkAction {
   return async (dispatch, getState) => {
 
     setTimeout(() => {
-      const incrementAction = increment()
+      const incrementAction = _increment()
       dispatch(incrementAction)
     }, milliseconds)
   }
