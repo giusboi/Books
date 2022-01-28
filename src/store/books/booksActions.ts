@@ -1,22 +1,23 @@
 import { AppThunkAction } from '../store';
 import { ApiClient } from '../../managers/api/ApiClient';
 import { Book } from '../../managers/api/models/Book';
+import { ReqState } from '../ReqState';
 
-export type BooksAction = GetBooksLoadingAction | GetBooksSuccessAction | ClearBooksAction
+export type BooksAction = SetBooksReqStateAction | GetBooksSuccessAction | ClearBooksAction
 
-// *** GET_BOOKS_LOADING *** //
+// *** SET_BOOKS_REQ_STATE *** //
 
-export const GET_BOOKS_LOADING = "GET_BOOKS_LOADING"
+export const SET_BOOKS_REQ_STATE = "SET_BOOKS_REQ_STATE"
 
-export interface GetBooksLoadingAction {
-  type: typeof GET_BOOKS_LOADING,
-  payload: undefined
+export interface SetBooksReqStateAction {
+  type: typeof SET_BOOKS_REQ_STATE,
+  payload: ReqState
 }
 
-function _getBooksLoading(): GetBooksLoadingAction {
+function _setBooksReqState(reqState: ReqState): SetBooksReqStateAction {
   return {
-    type: GET_BOOKS_LOADING,
-    payload: undefined
+    type: SET_BOOKS_REQ_STATE,
+    payload: reqState
   }
 }
 
@@ -40,9 +41,14 @@ function _getBooks(books: readonly Book[]): GetBooksSuccessAction {
 
 export function getBooks(listNameEncode: string): AppThunkAction {
   return async (dispatch, getState) => {
-    dispatch(_getBooksLoading())
-    const books = await ApiClient.getBooks(listNameEncode)
-    dispatch(_getBooks(books))
+    dispatch(_setBooksReqState(ReqState.loading))
+    try {
+      const books = await ApiClient.getBooks(listNameEncode)
+      dispatch(_getBooks(books))
+    } catch {
+      dispatch(_setBooksReqState(ReqState.error))
+    }
+
   }
 }
 

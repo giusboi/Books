@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../store/store';
 import { changeUser, ChangeUserType } from '../store/user/userActions';
 import { Book } from '../managers/api/models/Book';
 import { clearBooks, getBooks } from '../store/books/booksActions';
+import { ReqState } from '../store/ReqState';
 
 type NavProps = NativeStackScreenProps<StackParamList, 'Detail'>
 
@@ -16,7 +17,7 @@ export const DetailScreen = (props: Props) => {
   const { listNameEncoded } = route.params
   const user = useAppSelector(state => state.user)
   const items = useAppSelector(state => state.books.items)
-  const loading = useAppSelector(state => state.books.loading)
+  const reqState = useAppSelector(state => state.books.reqState)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -47,10 +48,16 @@ export const DetailScreen = (props: Props) => {
 
   const keyExtractor = useCallback((item, index) => `book_${index}`, []);
 
-  if (loading) {
+  if (reqState === ReqState.loading) {
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <ActivityIndicator />
+      </View>
+    )
+  } else if (reqState === ReqState.error) {
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <Text>Error during network call</Text>
       </View>
     )
   }
