@@ -16,6 +16,7 @@ export const DetailScreen = (props: Props) => {
   const { listNameEncoded } = route.params
   const user = useAppSelector(state => state.user)
   const items = useAppSelector(state => state.books.items)
+  const loading = useAppSelector(state => state.books.loading)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -46,13 +47,13 @@ export const DetailScreen = (props: Props) => {
 
   const keyExtractor = useCallback((item, index) => `book_${index}`, []);
 
-  // if (loading) {
-  //   return (
-  //     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-  //       <ActivityIndicator />
-  //     </View>
-  //   )
-  // }
+  if (loading) {
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <ActivityIndicator />
+      </View>
+    )
+  }
 
   return (
     <View style={{flex: 1}}>

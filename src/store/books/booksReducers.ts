@@ -1,23 +1,32 @@
 import { Book } from '../../managers/api/models/Book';
-import { CLEAR_BOOKS, ClearBooksAction, GET_BOOKS_SUCCESS, GetBooksSuccessAction } from './booksActions';
+import { BooksAction, CLEAR_BOOKS, GET_BOOKS_LOADING, GET_BOOKS_SUCCESS } from './booksActions';
 
 export interface BooksState {
   readonly items: readonly Book[]
+  readonly loading: boolean
 }
 
 const initialState: BooksState = {
-  items: []
+  items: [],
+  loading: true
 }
 
 export function booksReducer(
   state: BooksState = initialState,
-  action: GetBooksSuccessAction | ClearBooksAction
+  action: BooksAction
 ): BooksState {
   switch (action.type) {
+    case GET_BOOKS_LOADING: {
+      return {
+        ...state,
+        loading: true
+      }
+    }
     case GET_BOOKS_SUCCESS: {
       return {
         ...state,
-        items: action.payload
+        items: action.payload,
+        loading: false
       }
     }
     case CLEAR_BOOKS: {
