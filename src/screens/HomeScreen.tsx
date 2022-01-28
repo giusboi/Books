@@ -24,7 +24,7 @@ export const HomeScreen = (props: Props) => {
     dispatch(getCategories())
   }, [dispatch])
 
-  const count = useAppSelector((state) => countSelector(state))
+  const count = useAppSelector(countSelector)
   // const count = useAppSelector((state) => multiplySelector(state, 2))
 
   const onIncrementPress = () => {
