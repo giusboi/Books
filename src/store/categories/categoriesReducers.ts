@@ -1,5 +1,5 @@
 import { Category } from '../../managers/api/models/Category';
-import { GET_CATEGORIES_SUCCESS, GetCategoriesSuccess } from './categoriesActions';
+import { GET_CATEGORIES_SUCCESS, GetCategoriesSuccessAction } from './categoriesActions';
 
 export interface CategoriesState {
   readonly items: readonly Category[]
@@ -11,7 +11,7 @@ const initialState: CategoriesState = {
 
 export function categoriesReducer(
   state: CategoriesState = initialState,
-  action: GetCategoriesSuccess
+  action: GetCategoriesSuccessAction
 ): CategoriesState {
   switch (action.type) {
     case GET_CATEGORIES_SUCCESS: {

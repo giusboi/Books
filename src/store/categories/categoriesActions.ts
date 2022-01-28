@@ -4,12 +4,12 @@ import { ApiClient } from '../../managers/api/ApiClient';
 
 export const GET_CATEGORIES_SUCCESS = "GET_CATEGORIES_SUCCESS"
 
-export interface GetCategoriesSuccess {
+export interface GetCategoriesSuccessAction {
   type: typeof GET_CATEGORIES_SUCCESS,
   payload: readonly Category[]
 }
 
-function _getCategories(categories: readonly Category[]): GetCategoriesSuccess {
+function _getCategories(categories: readonly Category[]): GetCategoriesSuccessAction {
   return {
     type: GET_CATEGORIES_SUCCESS,
     payload: categories

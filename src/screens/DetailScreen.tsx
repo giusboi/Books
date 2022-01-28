@@ -5,7 +5,7 @@ import { StackParamList } from '../Navigation';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { changeUser, ChangeUserType } from '../store/user/userActions';
 import { Book } from '../managers/api/models/Book';
-import { getBooks } from '../store/books/booksActions';
+import { clearBooks, getBooks } from '../store/books/booksActions';
 
 type NavProps = NativeStackScreenProps<StackParamList, 'Detail'>
 
@@ -24,6 +24,12 @@ export const DetailScreen = (props: Props) => {
     }
     dispatch(getBooks(listNameEncoded))
   }, [dispatch, listNameEncoded])
+
+  useEffect(() => {
+    return () => {
+       dispatch(clearBooks())
+    }
+  }, [dispatch])
 
   const onPress = () => {
     dispatch(changeUser('MarioNEW', ChangeUserType.NAME))

@@ -1,6 +1,5 @@
 import { Book } from '../../managers/api/models/Book';
-import { GET_BOOKS_SUCCESS, GetBooksSuccess } from './booksActions';
-import { CategoriesState } from '../categories/categoriesReducers';
+import { CLEAR_BOOKS, ClearBooksAction, GET_BOOKS_SUCCESS, GetBooksSuccessAction } from './booksActions';
 
 export interface BooksState {
   readonly items: readonly Book[]
@@ -12,13 +11,19 @@ const initialState: BooksState = {
 
 export function booksReducer(
   state: BooksState = initialState,
-  action: GetBooksSuccess
+  action: GetBooksSuccessAction | ClearBooksAction
 ): BooksState {
   switch (action.type) {
     case GET_BOOKS_SUCCESS: {
       return {
         ...state,
         items: action.payload
+      }
+    }
+    case CLEAR_BOOKS: {
+      return {
+        ...state,
+        items: []
       }
     }
     default: {
