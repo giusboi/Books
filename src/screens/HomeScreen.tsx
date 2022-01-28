@@ -7,6 +7,7 @@ import { incrementAfter } from '../store/counter/counterActions';
 import { countSelector } from '../store/counter/counterSelectors';
 import { ApiClient } from '../managers/api/ApiClient';
 import { Category } from '../managers/api/models/Category';
+import { getCategories } from '../store/categories/categoriesActions';
 
 type NavProps = NativeStackScreenProps<StackParamList, 'Home'>
 
@@ -16,13 +17,13 @@ interface Props {}
 
 export const HomeScreen = (props: Props) => {
   const { navigation } = props
-  const [categories, setCategories] = useState<ReadonlyArray<Category>>([])
+  const dispatch = useAppDispatch()
+  const items = useAppSelector(state => state.categories.items)
 
   useEffect(() => {
-    ApiClient.getCategories().then(setCategories)
-  }, [])
+    dispatch(getCategories())
+  }, [dispatch])
 
-  const dispatch = useAppDispatch()
   const count = useAppSelector((state) => countSelector(state))
   // const count = useAppSelector((state) => multiplySelector(state, 2))
 
@@ -53,7 +54,7 @@ export const HomeScreen = (props: Props) => {
       <Button title={'Increment'} onPress={onIncrementPress}/>
       <Text>Count: {count}</Text>
       <FlatList
-        data={categories}
+        data={items}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
       />
