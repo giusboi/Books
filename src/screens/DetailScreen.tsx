@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, Button, FlatList, ListRenderItem, Text, View } from 'react-native';
+import { ActivityIndicator, Button, FlatList, ListRenderItem, Text, TouchableOpacity, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackParamList } from '../Navigation';
 import { useAppDispatch, useAppSelector } from '../store/store';
@@ -20,12 +20,16 @@ export const DetailScreen = (props: Props) => {
   const reqState = useAppSelector(state => state.books.reqState)
   const dispatch = useAppDispatch()
 
+  const getBooksAction = useCallback(() => {
+    dispatch(getBooks(listNameEncoded))
+  }, [dispatch, listNameEncoded])
+
   useEffect(() => {
     if (!listNameEncoded) {
       return
     }
-    dispatch(getBooks(listNameEncoded))
-  }, [dispatch, listNameEncoded])
+    getBooksAction()
+  }, [getBooksAction, listNameEncoded])
 
   useEffect(() => {
     return () => {
@@ -58,6 +62,7 @@ export const DetailScreen = (props: Props) => {
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <Text>Error during network call</Text>
+        <Button title="Try Again" onPress={getBooksAction} />
       </View>
     )
   }
