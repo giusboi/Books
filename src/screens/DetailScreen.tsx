@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button, FlatList, ListRenderItem, Text, View } from 'react-native';
+import { ActivityIndicator, Button, FlatList, ListRenderItem, Text, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackParamList } from '../Navigation';
 import { useAppDispatch, useAppSelector } from '../store/store';
@@ -16,12 +16,19 @@ export const DetailScreen = (props: Props) => {
   const { listNameEncoded } = route.params
 
   const [books, setBooks] = useState<ReadonlyArray<Book>>([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (!listNameEncoded) {
       return
     }
-    ApiClient.getBooks(listNameEncoded).then(setBooks)
+    setLoading(true)
+    ApiClient
+      .getBooks(listNameEncoded)
+      .then(resBooks => {
+        setBooks(resBooks)
+        setLoading(false)
+      })
   }, [listNameEncoded])
 
   const user = useAppSelector(state => state.user)
@@ -41,6 +48,14 @@ export const DetailScreen = (props: Props) => {
   }, [])
 
   const keyExtractor = useCallback((item, index) => `book_${index}`, []);
+
+  if (loading) {
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <ActivityIndicator />
+      </View>
+    )
+  }
 
   return (
     <View style={{flex: 1}}>

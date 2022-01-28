@@ -2,9 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Button, FlatList, ListRenderItem, Text, TouchableOpacity, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StackParamList } from '../Navigation';
-import { MyButton } from '../components/MyButton';
 import { useAppDispatch, useAppSelector } from '../store/store';
-import { increment } from '../store/counter/counterActions';
+import { increment, incrementAfter } from '../store/counter/counterActions';
 import { countSelector } from '../store/counter/counterSelectors';
 import { ApiClient } from '../managers/api/ApiClient';
 import { Category } from '../managers/api/models/Category';
@@ -28,8 +27,8 @@ export const HomeScreen = (props: Props) => {
   // const count = useAppSelector((state) => multiplySelector(state, 2))
 
   const onIncrementPress = () => {
-    const incrementAction = increment()
-    dispatch(incrementAction)
+    const incrementAfterAction = incrementAfter(5000)
+    dispatch(incrementAfterAction)
   }
 
   const onCategoryPress = useCallback((category: Category) => {

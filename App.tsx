@@ -8,7 +8,7 @@ const store = createMyStore()
 export default function App() {
   return (
     <Provider store={store}>
-      <AppNavigator />
+        <AppNavigator />
     </Provider>
   );
 }
