@@ -5,12 +5,14 @@ import { createLogger } from 'redux-logger';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { userReducer } from './user/userReducers';
 import { categoriesReducer } from './categories/categoriesReducers';
+import { booksReducer } from './books/booksReducers';
 
 export function createMyStore() {
   const rootReducer = combineReducers({
     counter: counterReducer,
     user: userReducer,
-    categories: categoriesReducer
+    categories: categoriesReducer,
+    books: booksReducer
   })
   const logger = createLogger()
   const storeEnhancer = applyMiddleware(thunk, logger)
